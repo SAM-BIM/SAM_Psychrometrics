@@ -79,5 +79,35 @@ namespace SAM.Core.Grasshopper.Psychrometrics.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SAM_GH_MollierChartCalculate {
+            get {
+                object obj = ResourceManager.GetObject("SAM_GH_MollierChartCalculate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SAM_GH_ThermometerCalculate {
+            get {
+                object obj = ResourceManager.GetObject("SAM_GH_ThermometerCalculate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SAM_GH_ThermometerConvert {
+            get {
+                object obj = ResourceManager.GetObject("SAM_GH_ThermometerConvert", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
