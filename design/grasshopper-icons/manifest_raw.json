@@ -1,0 +1,53 @@
+[
+ {
+  "project": "SAM.Core.Grasshopper.Psychrometrics",
+  "project_dir": "Grasshopper/SAM.Core.Grasshopper.Psychrometrics",
+  "class": "SAMPsychrometricsDewPointTemperature",
+  "base_type": "GH_SAMVariableOutputParameterComponent",
+  "guid": "e9bf471d-4ca5-4847-b5b9-bb3fbf712e41",
+  "name": "SAMPsychrometrics.DewPointTemperature",
+  "nickname": "SAMPsychrometrics.DewPointTemperature",
+  "category": "SAM",
+  "subcategory": "Psychrometrics",
+  "icon_expr": "SAM_Psychrometrics",
+  "icon_holder": "Resources",
+  "icon_via_bytes": false,
+  "exposure": null,
+  "obsolete": false,
+  "source": "Grasshopper/SAM.Core.Grasshopper.Psychrometrics/Component/SAMPsychrometricsDewPointTemperature.cs"
+ },
+ {
+  "project": "SAM.Core.Grasshopper.Psychrometrics",
+  "project_dir": "Grasshopper/SAM.Core.Grasshopper.Psychrometrics",
+  "class": "SAMPsychrometricsDryBulbTemperature",
+  "base_type": "GH_SAMVariableOutputParameterComponent",
+  "guid": "7a795583-cabe-452e-864f-bce79135fd5c",
+  "name": "SAMPsychrometrics.DryBulbTemperature",
+  "nickname": "SAMPsychrometrics.DryBulbTemperature",
+  "category": "SAM",
+  "subcategory": "Psychrometrics",
+  "icon_expr": "SAM_Psychrometrics",
+  "icon_holder": "Resources",
+  "icon_via_bytes": false,
+  "exposure": null,
+  "obsolete": false,
+  "source": "Grasshopper/SAM.Core.Grasshopper.Psychrometrics/Component/SAMPsychrometricsDryBulbTemperature.cs"
+ },
+ {
+  "project": "SAM.Core.Grasshopper.Psychrometrics",
+  "project_dir": "Grasshopper/SAM.Core.Grasshopper.Psychrometrics",
+  "class": "SAMPsychrometricsPsychrometrics",
+  "base_type": "GH_SAMVariableOutputParameterComponent",
+  "guid": "064dc9f2-a368-459a-9e97-b60588a269f1",
+  "name": "SAMPsychrometrics.Psychrometrics",
+  "nickname": "SAMPsychrometrics.Psychrometrics",
+  "category": "SAM",
+  "subcategory": "Psychrometrics",
+  "icon_expr": "SAM_Psychrometrics",
+  "icon_holder": "Resources",
+  "icon_via_bytes": false,
+  "exposure": "GH_Exposure.primary",
+  "obsolete": false,
+  "source": "Grasshopper/SAM.Core.Grasshopper.Psychrometrics/Component/SAMPsychrometricsPsychrometrics.cs"
+ }
+]
