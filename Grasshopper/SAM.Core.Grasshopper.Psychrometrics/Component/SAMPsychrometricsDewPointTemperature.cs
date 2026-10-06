@@ -1,10 +1,14 @@
-﻿using Grasshopper.Kernel;
+// SPDX-License-Identifier: LGPL-3.0-or-later
+// Copyright (c) 2020–2026 Michal Dengusiak & Jakub Ziolkowski and contributors
+
+using Grasshopper.Kernel;
 using SAM.Core.Grasshopper.Psychrometrics.Properties;
 using System;
+using System.Collections.Generic;
 
 namespace SAM.Core.Grasshopper.Psychrometrics
 {
-    public class SAMPsychrometricsDewPointTemperature : GH_SAMComponent
+    public class SAMPsychrometricsDewPointTemperature : GH_SAMVariableOutputParameterComponent
     {
         /// <summary>
         /// Gets the unique ID for this component. Do not change this ID after release.
@@ -14,7 +18,7 @@ namespace SAM.Core.Grasshopper.Psychrometrics
         /// <summary>
         /// The latest version of this component
         /// </summary>
-        public override string LatestComponentVersion => "1.0.0";
+        public override string LatestComponentVersion => "1.0.1";
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -34,21 +38,29 @@ namespace SAM.Core.Grasshopper.Psychrometrics
         /// <summary>
         /// Registers all the input parameters for this component.
         /// </summary>
-        protected override void RegisterInputParams(GH_InputParamManager inputParamManager)
+        protected override GH_SAMParam[] Inputs
         {
-            inputParamManager.AddNumberParameter("_dryBulbTemperature", "_dryBulbTemperature", "Dry Bulb Temperature [°C]", GH_ParamAccess.item);
-            inputParamManager.AddNumberParameter("_relativeHumidity", "_relativeHumidity", "Relative Humidity (0 - 100) [%]", GH_ParamAccess.item);
-
-            int index = inputParamManager.AddNumberParameter("_pressure_", "_pressure_", "optional Atmospheric Pressure [Pa]", GH_ParamAccess.item);
-            inputParamManager[index].Optional = true;
+            get
+            {
+                List<GH_SAMParam> result = new List<GH_SAMParam>();
+                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_dryBulbTemperature", NickName = "_dryBulbTemperature", Description = "Dry Bulb Temperature [°C]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
+                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_relativeHumidity", NickName = "_relativeHumidity", Description = "Relative Humidity (0 - 100) [%]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
+                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_pressure_", NickName = "_pressure_", Description = "optional Atmospheric Pressure [Pa]", Access = GH_ParamAccess.item, Optional = true }, ParamVisibility.Binding));
+                return result.ToArray();
+            }
         }
 
         /// <summary>
         /// Registers all the output parameters for this component.
         /// </summary>
-        protected override void RegisterOutputParams(GH_OutputParamManager outputParamManager)
+        protected override GH_SAMParam[] Outputs
         {
-            outputParamManager.AddNumberParameter("dewPointTemperature", "dewPointTemperature", "Dew Point Temperature [°C]", GH_ParamAccess.item);
+            get
+            {
+                List<GH_SAMParam> result = new List<GH_SAMParam>();
+                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "dewPointTemperature", NickName = "dewPointTemperature", Description = "Dew Point Temperature [°C]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
+                return result.ToArray();
+            }
         }
 
         protected override void SolveInstance(IGH_DataAccess dataAccess)
@@ -59,20 +71,23 @@ namespace SAM.Core.Grasshopper.Psychrometrics
             double relativeHumidity = double.NaN;
             double pressure = double.NaN;
 
-            if (!dataAccess.GetData(0, ref dryBulbTemperature) || double.IsNaN(dryBulbTemperature))
+            int index = Params.IndexOfInputParam("_dryBulbTemperature");
+            if (index == -1 || !dataAccess.GetData(index, ref dryBulbTemperature) || double.IsNaN(dryBulbTemperature))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
-            if (!dataAccess.GetData(1, ref relativeHumidity) || double.IsNaN(relativeHumidity))
+            index = Params.IndexOfInputParam("_relativeHumidity");
+            if (index == -1 || !dataAccess.GetData(index, ref relativeHumidity) || double.IsNaN(relativeHumidity))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Invalid data");
                 return;
             }
 
             double dewPointTemperature = double.NaN;
-            if (dataAccess.GetData(2, ref pressure) && !double.IsNaN(pressure))
+            index = Params.IndexOfInputParam("_pressure_");
+            if (index != -1 && dataAccess.GetData(index, ref pressure) && !double.IsNaN(pressure))
             {
                 dewPointTemperature = Core.Psychrometrics.Query.DewPointTemperature(dryBulbTemperature, relativeHumidity, pressure);
             }
@@ -81,8 +96,11 @@ namespace SAM.Core.Grasshopper.Psychrometrics
                 dewPointTemperature = Core.Psychrometrics.Query.DewPointTemperature(dryBulbTemperature, relativeHumidity);
             }
 
-            dataAccess.SetData(0, dewPointTemperature);
-
+            index = Params.IndexOfOutputParam("dewPointTemperature");
+            if (index != -1)
+            {
+                dataAccess.SetData(index, dewPointTemperature);
+            }
         }
     }
 }
