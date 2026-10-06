@@ -1,6 +1,6 @@
 # SAM Grasshopper icon redesign — SAM_Psychrometrics PR record
 
-Branch `feature/sam-gh-icon-redesign`, based on `sow/2026-Q3` @ `5addfa7`. PR: SAM-BIM/SAM_Psychrometrics#7.
+Branch `feature/sam-gh-icon-redesign-q4`, based on `sow/2026-Q4` @ `9c771758`. PR: SAM-BIM/SAM_Psychrometrics#9. Q4 migration of SAM-BIM/SAM_Psychrometrics#7 (`feature/sam-gh-icon-redesign` @ `e837f0c`, based on `sow/2026-Q3` @ `5addfa7`, kept open for provenance): the same commits replayed onto `sow/2026-Q4`; Q3 history was not imported.
 Propagates the SAM icon design system from SAM-BIM/SAM#166 (head `cf4d924a`, open, not merged) to this repository.
 
 ## Current status
@@ -53,7 +53,10 @@ Built and validated; ready for review. **Not merged.**
 - Built against sibling repos as checked out locally (SAM on `feature/sam-gh-icon-redesign` = SAM#166); icon changes are API-neutral.
 
 ## Recommended next step
-Review this PR (compare `review/contact_sheet.png`), then merge by the maintainer. After merge, add the `PROJECT_PROGRESS.md` closeout entry on `sow/2026-Q3` with the merge SHA. SAM#166 (the reference design system) remains open.
+Review this PR (compare `review/contact_sheet.png`), then merge by the maintainer. After merge, add the `PROJECT_PROGRESS.md` closeout entry on `sow/2026-Q4` with the merge SHA. SAM#166 (the reference design system) remains open.
 
 ## SPDX header policy (CI `spdx-check`)
 The repository SPDX check requires the LGPL-3.0-or-later SPDX line and the copyright line in every `.cs` file a PR changes. The icon-token swaps touched 2 older files that predated the policy (components, `Resources.Designer.cs`), and the kit test `IconTests.cs` had no header. The standard 2-line header was added to them; nothing else changed. `tools/check_source.py` accepts exactly this header as the only non-icon addition and compares against the merge base.
+
+## Q4 migration validation
+Re-validated on `sow/2026-Q4` @ `9c771758`: `tools/check_source.py origin/sow/2026-Q4` OK (icon-token swaps: 3, SPDX headers added: 1, non-icon changes: 0, ComponentGuid declarations unchanged); `dotnet build SAM_Psychrometrics.sln -c Debug` succeeded with 0 errors; `tools/check_assemblies.py build` OK. The Q4 feature diff has the same patch-id, file set and blobs as the Q3 PR's feature diff.
