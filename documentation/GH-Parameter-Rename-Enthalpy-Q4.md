@@ -4,6 +4,7 @@
 required). Do not release and do not repin an installer.
 
 - Repository: `SAM_Psychrometrics` (the one controlled rename). Shared mechanism: `SAM`.
+- PR: **SAM-BIM/SAM_Psychrometrics#12** -> `sow/2026-Q4` (**draft**, not merged).
 - Branch: `feature/gh-parameter-rename-migration-q4`, base `sow/2026-Q4` `c35f0f4` (closeout of PR #11).
 - Validated content SHA: `b6c61a55d520f2c1a5142b247dbfc7eccfba35d0` (the PR record is a docs-only commit on top).
 - Dependency: the shared `SAM` PR `feature/gh-parameter-rename-migration-q4`
@@ -76,7 +77,11 @@ The group is added to a copy of the legacy definition, saved and reopened, so me
 through serialization exactly as a grouped definition would be; after the update the group holds the
 replacement's `InstanceGuid` and not the old one.
 
-**Hosted checks:** pending; record the final head and results before marking ready.
+**Hosted checks (GitHub), at the content head `b6c61a55d520f2c1a5142b247dbfc7eccfba35d0`** (PR
+SAM_Psychrometrics#12): build **pass** (run `38755069972`, 2m44s), spdx **pass** (run `38755070009`). The
+build log confirms the dependency resolution cloned `SAM-BIM/SAM @ feature/gh-parameter-rename-migration-q4`
+— the intended merged dependency, not the `sow/2026-Q4` fallback ("Cloning SAM-BIM/SAM @
+feature/gh-parameter-rename-migration-q4"). A docs-only record commit follows.
 
 **NOT TESTED / known gap:** `python design/grasshopper-icons/tools/param_contract.py --check` was **not**
 run - no Python is available on this machine (the workflow note says the Rhino-bundled Python; RhinoCode
