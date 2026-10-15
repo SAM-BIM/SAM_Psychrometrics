@@ -85,7 +85,8 @@ Machine-local prerequisites: a Rhino 8 install (path is in `Rhino.Testing.Config
 existing `GhIconTest`), Python 3 for the checker (any Python 3 works; validated with the Python bundled
 with Rhino). Nothing else is required.
 
-**Hosted checks:** pending - rerun after pushing (existing `build.yml`, `spdx-check.yml`).
+**Hosted checks:** PASS at the final head `76a94860ed7633bfe817d6e8cb872cc1ec0a25c9` - `build`
+(run 38735870267, 3m14s) and `spdx` (run 38735870441).
 
 **NOT TESTED:** no manual interactive Rhino session (mouse-driven open/recompute) was performed; the
 acceptance run is headless Rhino 8 via `Rhino.Testing`, which loads the real installed runtime.
@@ -102,7 +103,8 @@ acceptance run is headless Rhino 8 via `Rhino.Testing`, which loads the real ins
 
 ## Exact next step
 
-1. Push the branch, open one PR into `sow/2026-Q4`, confirm the hosted checks at the final head.
+1. ~~Push the branch, open one PR into `sow/2026-Q4`, confirm the hosted checks at the final head.~~
+   Done: PR #11, final head `76a94860ed7633bfe817d6e8cb872cc1ec0a25c9`, `build` and `spdx` PASS.
 2. Owner review and explicit merge approval. Do **not** merge automatically and do not publish a release.
 3. After merge: docs-only `[skip ci]` closeout on `sow/2026-Q4` with the merge SHA, then lease-guarded
    deletion of the merged feature branch.
