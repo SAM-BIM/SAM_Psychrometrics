@@ -18,7 +18,7 @@ namespace SAM.Core.Grasshopper.Psychrometrics
         /// <summary>
         /// The latest version of this component
         /// </summary>
-        public override string LatestComponentVersion => "1.0.1";
+        public override string LatestComponentVersion => "1.0.2";
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -30,7 +30,7 @@ namespace SAM.Core.Grasshopper.Psychrometrics
         /// </summary>
         public SAMPsychrometricsDewPointTemperature()
           : base("SAMPsychrometrics.DewPointTemperature", "SAMPsychrometrics.DewPointTemperature",
-              "Calculates DewPointTemperature by Relative Humidity(0 - 100)[%] and Dry Bulb Temperature [°C] optionally Atmospheric Pressure [Pa] |101325 Pa ",
+              "Calculates the dew-point temperature [°C] from the dry-bulb temperature [°C] and the relative humidity (0 - 100) [%], optionally at the given atmospheric pressure [Pa] (default 101325).",
               "SAM", "Psychrometrics")
         {
         }
@@ -43,9 +43,9 @@ namespace SAM.Core.Grasshopper.Psychrometrics
             get
             {
                 List<GH_SAMParam> result = new List<GH_SAMParam>();
-                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_dryBulbTemperature", NickName = "_dryBulbTemperature", Description = "Dry Bulb Temperature [°C]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
-                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_relativeHumidity", NickName = "_relativeHumidity", Description = "Relative Humidity (0 - 100) [%]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
-                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_pressure_", NickName = "_pressure_", Description = "optional Atmospheric Pressure [Pa]", Access = GH_ParamAccess.item, Optional = true }, ParamVisibility.Binding));
+                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_dryBulbTemperature", NickName = "_dryBulbTemperature", Description = "Dry-bulb temperature [°C]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
+                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_relativeHumidity", NickName = "_relativeHumidity", Description = "Relative humidity (0 - 100) [%]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
+                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_pressure_", NickName = "_pressure_", Description = "Atmospheric pressure [Pa]. Default: 101325", Access = GH_ParamAccess.item, Optional = true }, ParamVisibility.Binding));
                 return result.ToArray();
             }
         }
@@ -58,7 +58,7 @@ namespace SAM.Core.Grasshopper.Psychrometrics
             get
             {
                 List<GH_SAMParam> result = new List<GH_SAMParam>();
-                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "dewPointTemperature", NickName = "dewPointTemperature", Description = "Dew Point Temperature [°C]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
+                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "dewPointTemperature", NickName = "dewPointTemperature", Description = "Dew-point temperature [°C]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
                 return result.ToArray();
             }
         }
