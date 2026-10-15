@@ -18,7 +18,7 @@ namespace SAM.Core.Grasshopper.Psychrometrics
         /// <summary>
         /// The latest version of this component
         /// </summary>
-        public override string LatestComponentVersion => "1.0.1";
+        public override string LatestComponentVersion => "1.0.2";
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -30,7 +30,7 @@ namespace SAM.Core.Grasshopper.Psychrometrics
         /// </summary>
         public SAMPsychrometricsDryBulbTemperature()
           : base("SAMPsychrometrics.DryBulbTemperature", "SAMPsychrometrics.DryBulbTemperature",
-              "Calculates dry bulb temperature [°C]",
+              "Calculates the dry-bulb temperature [°C] from the air density [kg/m³] and one humidity indication (relative humidity or humidity ratio) at the given atmospheric pressure [Pa].",
               "SAM", "Psychrometrics")
         {
         }
@@ -43,11 +43,11 @@ namespace SAM.Core.Grasshopper.Psychrometrics
             get
             {
                 List<GH_SAMParam> result = new List<GH_SAMParam>();
-                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_density", NickName = "_density", Description = "Density [kg/m3]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
-                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_humidityRatio_", NickName = "_humidityRatio_", Description = "Humidty Ratio [kg/kg]", Access = GH_ParamAccess.item, Optional = true }, ParamVisibility.Binding));
-                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_relativeHumidity_", NickName = "_relativeHumidity_", Description = "Relative Humidity (0 - 100) [%]", Access = GH_ParamAccess.item, Optional = true }, ParamVisibility.Binding));
+                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_density", NickName = "_density", Description = "Density [kg/m³]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
+                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_humidityRatio_", NickName = "_humidityRatio_", Description = "Humidity ratio [kg/kg] \n Connect relativeHumidity or humidityRatio, not both", Access = GH_ParamAccess.item, Optional = true }, ParamVisibility.Binding));
+                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_relativeHumidity_", NickName = "_relativeHumidity_", Description = "Relative humidity (0 - 100) [%] \n Connect relativeHumidity or humidityRatio, not both", Access = GH_ParamAccess.item, Optional = true }, ParamVisibility.Binding));
 
-                global::Grasshopper.Kernel.Parameters.Param_Number param_Number = new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_pressure_", NickName = "_pressure_", Description = "Atmospheric pressure [Pa]", Access = GH_ParamAccess.item, Optional = true };
+                global::Grasshopper.Kernel.Parameters.Param_Number param_Number = new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "_pressure_", NickName = "_pressure_", Description = "Atmospheric pressure [Pa]. Default: 101325", Access = GH_ParamAccess.item, Optional = true };
                 param_Number.SetPersistentData(101325);
                 result.Add(new GH_SAMParam(param_Number, ParamVisibility.Binding));
 
@@ -63,7 +63,7 @@ namespace SAM.Core.Grasshopper.Psychrometrics
             get
             {
                 List<GH_SAMParam> result = new List<GH_SAMParam>();
-                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "dryBulbTemperature", NickName = "dryBulbTemperature", Description = "Dry Bulb Temperature [°C]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
+                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "dryBulbTemperature", NickName = "dryBulbTemperature", Description = "Dry-bulb temperature [°C]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
                 return result.ToArray();
             }
         }

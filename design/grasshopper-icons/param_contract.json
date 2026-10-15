@@ -1,0 +1,365 @@
+{
+ "repository": "SAM_Psychrometrics",
+ "components": [
+  {
+   "class": "SAMPsychrometricsDewPointTemperature",
+   "guid": "e9bf471d-4ca5-4847-b5b9-bb3fbf712e41",
+   "name": "SAMPsychrometrics.DewPointTemperature",
+   "nickname": "SAMPsychrometrics.DewPointTemperature",
+   "category": "SAM",
+   "subcategory": "Psychrometrics",
+   "description": "Calculates the dew-point temperature [\u00b0C] from the dry-bulb temperature [\u00b0C] and the relative humidity (0 - 100) [%], optionally at the given atmospheric pressure [Pa] (default 101325).",
+   "latestComponentVersion": "1.0.2",
+   "inputs": [
+    {
+     "name": "_dryBulbTemperature",
+     "nickname": "_dryBulbTemperature",
+     "description": "Dry-bulb temperature [\u00b0C]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "_relativeHumidity",
+     "nickname": "_relativeHumidity",
+     "description": "Relative humidity (0 - 100) [%]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "_pressure_",
+     "nickname": "_pressure_",
+     "description": "Atmospheric pressure [Pa]. Default: 101325",
+     "type": "Param_Number",
+     "optional": true,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "dewPointTemperature",
+     "nickname": "dewPointTemperature",
+     "description": "Dew-point temperature [\u00b0C]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    }
+   ],
+   "source": "Grasshopper/SAM.Core.Grasshopper.Psychrometrics/Component/SAMPsychrometricsDewPointTemperature.cs"
+  },
+  {
+   "class": "SAMPsychrometricsDryBulbTemperature",
+   "guid": "7a795583-cabe-452e-864f-bce79135fd5c",
+   "name": "SAMPsychrometrics.DryBulbTemperature",
+   "nickname": "SAMPsychrometrics.DryBulbTemperature",
+   "category": "SAM",
+   "subcategory": "Psychrometrics",
+   "description": "Calculates the dry-bulb temperature [\u00b0C] from the air density [kg/m\u00b3] and one humidity indication (relative humidity or humidity ratio) at the given atmospheric pressure [Pa].",
+   "latestComponentVersion": "1.0.2",
+   "inputs": [
+    {
+     "name": "_density",
+     "nickname": "_density",
+     "description": "Density [kg/m\u00b3]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "_humidityRatio_",
+     "nickname": "_humidityRatio_",
+     "description": "Humidity ratio [kg/kg] \n Connect relativeHumidity or humidityRatio, not both",
+     "type": "Param_Number",
+     "optional": true,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "_relativeHumidity_",
+     "nickname": "_relativeHumidity_",
+     "description": "Relative humidity (0 - 100) [%] \n Connect relativeHumidity or humidityRatio, not both",
+     "type": "Param_Number",
+     "optional": true,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "_pressure_",
+     "nickname": "_pressure_",
+     "description": "Atmospheric pressure [Pa]. Default: 101325",
+     "type": "Param_Number",
+     "optional": true,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": "101325"
+    }
+   ],
+   "outputs": [
+    {
+     "name": "dryBulbTemperature",
+     "nickname": "dryBulbTemperature",
+     "description": "Dry-bulb temperature [\u00b0C]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    }
+   ],
+   "source": "Grasshopper/SAM.Core.Grasshopper.Psychrometrics/Component/SAMPsychrometricsDryBulbTemperature.cs"
+  },
+  {
+   "class": "SAMPsychrometricsPsychrometrics",
+   "guid": "064dc9f2-a368-459a-9e97-b60588a269f1",
+   "name": "SAMPsychrometrics.Psychrometrics",
+   "nickname": "SAMPsychrometrics.Psychrometrics",
+   "category": "SAM",
+   "subcategory": "Psychrometrics",
+   "description": "Calculates the psychrometric properties of moist air - relative humidity, humidity ratio, wet-bulb temperature, dew-point temperature, \nsaturation and partial vapour pressures, enthalpy, specific volume, density and degree of saturation - from the dry-bulb temperature, \none humidity indication (relative humidity or humidity ratio or wet-bulb temperature or dew-point temperature) and, optionally, the atmospheric pressure. \nThe degree of saturation is the humidity ratio of the air divided by the humidity ratio of saturated air at the same temperature and pressure. \nConnect only one humidity indication.",
+   "latestComponentVersion": "1.0.6",
+   "inputs": [
+    {
+     "name": "_dryBulbTemperature",
+     "nickname": "_dryBulbTemperature",
+     "description": "Dry-bulb temperature [\u00b0C]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "_relativeHumidity_",
+     "nickname": "_relativeHumidity_",
+     "description": "Relative humidity (0 - 100) [%] \n Connect only one humidity indication \n relativeHumidity or humidityRatio or wetBulbTemperature or dewPointTemperature",
+     "type": "Param_Number",
+     "optional": true,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "_humidityRatio_",
+     "nickname": "_humidityRatio_",
+     "description": "Humidity ratio [g/kg] \n Connect only one humidity indication \n relativeHumidity or humidityRatio or wetBulbTemperature or dewPointTemperature",
+     "type": "Param_Number",
+     "optional": true,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "_wetBulbTemperature_",
+     "nickname": "_wetBulbTemperature_",
+     "description": "Wet-bulb temperature [\u00b0C] \n Connect only one humidity indication \n relativeHumidity or humidityRatio or wetBulbTemperature or dewPointTemperature",
+     "type": "Param_Number",
+     "optional": true,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "_dewPointTemperature_",
+     "nickname": "_dewPointTemperature_",
+     "description": "Dew-point temperature [\u00b0C] \n Connect only one humidity indication \n relativeHumidity or humidityRatio or wetBulbTemperature or dewPointTemperature",
+     "type": "Param_Number",
+     "optional": true,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "_pressure_",
+     "nickname": "_pressure_",
+     "description": "Atmospheric pressure [Pa]. Default: 101325",
+     "type": "Param_Number",
+     "optional": true,
+     "access": "item",
+     "visibility": "Voluntary",
+     "persistentDefault": "101325"
+    }
+   ],
+   "outputs": [
+    {
+     "name": "dryBulbTemperature",
+     "nickname": "dryBulbTemperature",
+     "description": "Dry-bulb temperature [\u00b0C]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "relativeHumidity",
+     "nickname": "relativeHumidity",
+     "description": "Relative humidity (0 - 100) [%]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "humidityRatio",
+     "nickname": "humidityRatio",
+     "description": "Humidity ratio [g/kg]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "saturationHumidityRatio",
+     "nickname": "saturationHumidityRatio",
+     "description": "Saturation humidity ratio [g/kg]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "wetBulbTemperature",
+     "nickname": "wetBulbTemperature",
+     "description": "Wet-bulb temperature [\u00b0C]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "dewPointTemperature",
+     "nickname": "dewPointTemperature",
+     "description": "Dew-point temperature [\u00b0C]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "saturationVapourPressure",
+     "nickname": "saturationVapourPressure",
+     "description": "Saturation vapour pressure [Pa]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "partialVapourPressure",
+     "nickname": "partialVapourPressure",
+     "description": "Partial vapour pressure [Pa]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "partialDryAirPressure",
+     "nickname": "partialDryAirPressure",
+     "description": "Partial dry air pressure [Pa]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "enthalpy",
+     "nickname": "enthalpy",
+     "description": "Enthalpy [kJ/kg]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "specificVolume",
+     "nickname": "specificVolume",
+     "description": "Specific volume [m\u00b3/kg]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "density",
+     "nickname": "density",
+     "description": "Density [kg/m\u00b3]",
+     "type": "Param_Number",
+     "optional": false,
+     "access": "item",
+     "visibility": "Binding",
+     "persistentDefault": null
+    },
+    {
+     "name": "degreeSaturation",
+     "nickname": "degreeSaturation",
+     "description": "Degree of saturation [-]",
+     "type": "Param_Number",
+     "optional": true,
+     "access": "item",
+     "visibility": "Voluntary",
+     "persistentDefault": null
+    },
+    {
+     "name": "pressure",
+     "nickname": "pressure",
+     "description": "Atmospheric pressure [Pa]",
+     "type": "Param_Number",
+     "optional": true,
+     "access": "item",
+     "visibility": "Voluntary",
+     "persistentDefault": null
+    }
+   ],
+   "source": "Grasshopper/SAM.Core.Grasshopper.Psychrometrics/Component/SAMPsychrometricsPsychrometrics.cs"
+  }
+ ],
+ "namingExceptions": [
+  "SAMPsychrometricsDewPointTemperature.input._pressure_",
+  "SAMPsychrometricsDewPointTemperature.output.dewPointTemperature",
+  "SAMPsychrometricsDryBulbTemperature.input._humidityRatio_",
+  "SAMPsychrometricsDryBulbTemperature.input._relativeHumidity_",
+  "SAMPsychrometricsDryBulbTemperature.output.dryBulbTemperature",
+  "SAMPsychrometricsPsychrometrics.input._dewPointTemperature_",
+  "SAMPsychrometricsPsychrometrics.input._humidityRatio_",
+  "SAMPsychrometricsPsychrometrics.input._relativeHumidity_",
+  "SAMPsychrometricsPsychrometrics.input._wetBulbTemperature_",
+  "SAMPsychrometricsPsychrometrics.output.degreeSaturation",
+  "SAMPsychrometricsPsychrometrics.output.density",
+  "SAMPsychrometricsPsychrometrics.output.dewPointTemperature",
+  "SAMPsychrometricsPsychrometrics.output.dryBulbTemperature",
+  "SAMPsychrometricsPsychrometrics.output.enthalpy",
+  "SAMPsychrometricsPsychrometrics.output.humidityRatio",
+  "SAMPsychrometricsPsychrometrics.output.partialDryAirPressure",
+  "SAMPsychrometricsPsychrometrics.output.partialVapourPressure",
+  "SAMPsychrometricsPsychrometrics.output.pressure",
+  "SAMPsychrometricsPsychrometrics.output.relativeHumidity",
+  "SAMPsychrometricsPsychrometrics.output.saturationHumidityRatio",
+  "SAMPsychrometricsPsychrometrics.output.saturationVapourPressure",
+  "SAMPsychrometricsPsychrometrics.output.specificVolume",
+  "SAMPsychrometricsPsychrometrics.output.wetBulbTemperature"
+ ]
+}
