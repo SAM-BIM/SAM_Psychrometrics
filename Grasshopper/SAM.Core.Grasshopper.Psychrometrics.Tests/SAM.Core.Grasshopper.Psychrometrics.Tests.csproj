@@ -26,6 +26,10 @@
     <Reference Include="SAM.Core.Grasshopper">
       <HintPath>..\..\..\SAM\build\SAM.Core.Grasshopper.dll</HintPath>
     </Reference>
+    <!-- The updater's Log/LogRecord and the ParameterRename types the component declares live in SAM.Core. -->
+    <Reference Include="SAM.Core">
+      <HintPath>..\..\..\SAM\build\SAM.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

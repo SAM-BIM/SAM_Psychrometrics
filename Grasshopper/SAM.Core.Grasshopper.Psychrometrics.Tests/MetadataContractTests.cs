@@ -39,7 +39,7 @@ namespace SAM.Core.Grasshopper.Psychrometrics.Tests
         {
             "dryBulbTemperature", "relativeHumidity", "humidityRatio", "saturationHumidityRatio", "wetBulbTemperature",
             "dewPointTemperature", "saturationVapourPressure", "partialVapourPressure", "partialDryAirPressure",
-            "enthalpy", "specificVolume", "density"
+            "Enthalpy", "specificVolume", "density"
         };
 
         private static readonly string[] DryBulbInputs = { "_density", "_humidityRatio_", "_relativeHumidity_", "_pressure_" };
@@ -56,7 +56,7 @@ namespace SAM.Core.Grasshopper.Psychrometrics.Tests
         [Test]
         public void Psychrometrics_ParameterContract()
         {
-            AssertContract(new SAMPsychrometricsPsychrometrics(), "1.0.6", PsychrometricsInputs, PsychrometricsOutputs,
+            AssertContract(new SAMPsychrometricsPsychrometrics(), "1.0.7", PsychrometricsInputs, PsychrometricsOutputs,
                 optionalInputs: new[] { "_relativeHumidity_", "_humidityRatio_", "_wetBulbTemperature_", "_dewPointTemperature_" });
         }
 

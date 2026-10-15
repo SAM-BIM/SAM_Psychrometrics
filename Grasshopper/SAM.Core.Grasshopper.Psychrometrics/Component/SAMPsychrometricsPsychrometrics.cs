@@ -19,7 +19,25 @@ namespace SAM.Analytical.Grasshopper
         /// <summary>
         /// The latest version of this component
         /// </summary>
-        public override string LatestComponentVersion => "1.0.6";
+        public override string LatestComponentVersion => "1.0.7";
+
+        /// <summary>
+        /// <b>Published parameter renames.</b>
+        /// <para>
+        /// The enthalpy output was published as <c>enthalpy</c> and is now <c>Enthalpy</c> (the SAM-BIM
+        /// naming standard asks for PascalCase outputs). Grasshopper restores a component's parameters from
+        /// the definition, so an older definition keeps carrying <c>enthalpy</c>: declaring the rename here
+        /// lets the SAM updater carry that output's wires onto <c>Enthalpy</c>, and lets
+        /// <see cref="SolveInstance"/> still find it on a definition that has not been updated. No other
+        /// parameter name was changed.
+        /// </para>
+        /// </summary>
+        public override IReadOnlyList<ParameterRename> ParameterRenames => parameterRenames;
+
+        private static readonly ParameterRename[] parameterRenames = new[]
+        {
+            new ParameterRename(GH_ParameterSide.Output, "enthalpy", "Enthalpy"),
+        };
 
         /// <summary>
         /// Provides an Icon for the component.
@@ -61,7 +79,7 @@ namespace SAM.Analytical.Grasshopper
                 result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "saturationVapourPressure", NickName = "saturationVapourPressure", Description = "Saturation vapour pressure [Pa]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
                 result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "partialVapourPressure", NickName = "partialVapourPressure", Description = "Partial vapour pressure [Pa]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
                 result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "partialDryAirPressure", NickName = "partialDryAirPressure", Description = "Partial dry air pressure [Pa]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
-                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "enthalpy", NickName = "enthalpy", Description = "Enthalpy [kJ/kg]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
+                result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "Enthalpy", NickName = "Enthalpy", Description = "Enthalpy [kJ/kg]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
                 result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "specificVolume", NickName = "specificVolume", Description = "Specific volume [m³/kg]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
                 result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "density", NickName = "density", Description = "Density [kg/m³]", Access = GH_ParamAccess.item }, ParamVisibility.Binding));
                 result.Add(new GH_SAMParam(new global::Grasshopper.Kernel.Parameters.Param_Number() { Name = "degreeSaturation", NickName = "degreeSaturation", Description = "Degree of saturation [-]", Access = GH_ParamAccess.item, Optional = true }, ParamVisibility.Voluntary));
@@ -312,7 +330,7 @@ namespace SAM.Analytical.Grasshopper
                 dataAccess.SetData(index, partialDryAirPressure);
             }
 
-            index = Params.IndexOfOutputParam("enthalpy");
+            index = IndexOfOutputParameter("Enthalpy");
             if (index != -1)
             {
                 dataAccess.SetData(index, enthalpy/1000);

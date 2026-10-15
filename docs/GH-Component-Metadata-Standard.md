@@ -137,29 +137,35 @@ Both run without the shared SAM repository being modified.
 
 ## 5. Documented legacy exceptions (deferred migration)
 
-The 23 identifiers in `param_contract.json → namingExceptions` do not follow section 1 and are expected
-to stay as they are:
+The identifiers in `param_contract.json → namingExceptions` do not follow section 1. **One of them -
+`SAMPsychrometricsPsychrometrics.output.enthalpy`, renamed to `Enthalpy` - was migrated by the approved
+rename pilot (2026-Q4);** the remaining 22 are expected to stay as they are:
 
-- the **16 outputs** are `camelCase` where the standard asks for `PascalCase`, and
+- the **15 outputs** are `camelCase` where the standard asks for `PascalCase`, and
 - the **7 optional inputs with no persistent default** (`_relativeHumidity_`, `_humidityRatio_`,
   `_wetBulbTemperature_`, `_dewPointTemperature_` in Psychrometrics; `_humidityRatio_`,
   `_relativeHumidity_` in DryBulb; `_pressure_` in DewPoint) use `_name_` where `name_` would be the
   standard spelling.
 
-Applying any of them requires the breaking migration below, and is out of scope for this pilot.
+### The rename migration, as implemented (2026-Q4)
 
-### Deferred migration (not implemented)
+A reopened component keeps the names the FILE has, so a safe rename needs the component to keep resolving
+the OLD name and the updater to carry the old name's wires and values onto the new parameter. That is now
+implemented in shared `SAM` and piloted here:
 
-A safe rename needs the old and new names to coexist, because a reopened component keeps the file's
-names:
+1. the component declares its rename through `GH_SAMComponent.ParameterRenames`
+   (`SAMPsychrometricsPsychrometrics` declares exactly one: output `enthalpy` → `Enthalpy`);
+2. its own `SolveInstance` resolves a parameter through `IndexOfOutputParameter`, which falls back to the
+   legacy name, so an un-updated definition still computes;
+3. the SAM updater (`Modify.DuplicateComponent`) resolves the declared renames when it restores wires and
+   persistent values, refuses an ambiguous declaration or a redirect whose parameter type changed, and
+   moves `GH_Group` membership to the replacement (a replacement always has a new `InstanceGuid`);
+4. `LatestComponentVersion` is bumped, so the rename is offered only through the explicit *Update
+   component* - never applied when a file is opened.
 
-1. Accept both names in `SolveInstance` (look up the new name, fall back to the old), and
-2. keep both declared in `Inputs`/`Outputs` so `CreateParameter`/`RestoreConnections` can still resolve
-   the old name, with the retired one hidden, plus
-3. a version bump and an owner-approved migration note.
-
-That changes shared behaviour and must be planned with the SAM serialization/reconciliation helpers in
-view - the boundary this pilot was told not to cross.
+The remaining renames are still deferred: each is a breaking change and needs its own owner-approved,
+runtime-tested migration, exactly as this one had. Applying them is out of scope for anything but a
+separate, bounded task.
 
 ## 6. Proof this can be re-run
 

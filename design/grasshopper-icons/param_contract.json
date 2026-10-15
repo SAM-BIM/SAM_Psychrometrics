@@ -129,7 +129,7 @@
    "category": "SAM",
    "subcategory": "Psychrometrics",
    "description": "Calculates the psychrometric properties of moist air - relative humidity, humidity ratio, wet-bulb temperature, dew-point temperature, \nsaturation and partial vapour pressures, enthalpy, specific volume, density and degree of saturation - from the dry-bulb temperature, \none humidity indication (relative humidity or humidity ratio or wet-bulb temperature or dew-point temperature) and, optionally, the atmospheric pressure. \nThe degree of saturation is the humidity ratio of the air divided by the humidity ratio of saturated air at the same temperature and pressure. \nConnect only one humidity indication.",
-   "latestComponentVersion": "1.0.6",
+   "latestComponentVersion": "1.0.7",
    "inputs": [
     {
      "name": "_dryBulbTemperature",
@@ -284,8 +284,8 @@
      "persistentDefault": null
     },
     {
-     "name": "enthalpy",
-     "nickname": "enthalpy",
+     "name": "Enthalpy",
+     "nickname": "Enthalpy",
      "description": "Enthalpy [kJ/kg]",
      "type": "Param_Number",
      "optional": false,
@@ -351,7 +351,6 @@
   "SAMPsychrometricsPsychrometrics.output.density",
   "SAMPsychrometricsPsychrometrics.output.dewPointTemperature",
   "SAMPsychrometricsPsychrometrics.output.dryBulbTemperature",
-  "SAMPsychrometricsPsychrometrics.output.enthalpy",
   "SAMPsychrometricsPsychrometrics.output.humidityRatio",
   "SAMPsychrometricsPsychrometrics.output.partialDryAirPressure",
   "SAMPsychrometricsPsychrometrics.output.partialVapourPressure",
