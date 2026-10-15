@@ -1,5 +1,21 @@
 # Project Progress - SAM_Psychrometrics (2026-Q4)
 
+## Q4 Grasshopper parameter rename pilot (enthalpy → Enthalpy) closeout - 2026-10-15
+
+- **PR**: **SAM-BIM/SAM_Psychrometrics#12** → `sow/2026-Q4`, **merged 2026-10-15**, merge commit `bfb3bfd8a6eca66be610b8e8bad172d129dea3c4` (parents `c35f0f484237e35e7549c5074c423aa868964711` base and pinned head `5f7f8cc710b681dac4698907c43b5a6fa2e0c9be`). Validated content `b6c61a55d520f2c1a5142b247dbfc7eccfba35d0`; `d6ba62f` and `5f7f8cc` are record-only docs commits. Owner authorised the merge; no branch protection or required reviews, no comments, no conflicts.
+- **Shared dependency**: **SAM-BIM/SAM#203** merged first as `a1d605cfb14affc8f3cd5260537526aada5f620a`. The post-merge build selected and cloned the merged dependency (`Cloning SAM-BIM/SAM @ sow/2026-Q4`).
+- **Status**: complete.
+- **Hosted CI** (GitHub): PR head build `38755069972` and spdx `38755070009` both success; post-merge on `bfb3bfd8` build (Windows) `38763358073` success.
+- **Work**: exactly one published rename — `SAMPsychrometrics.Psychrometrics` output `enthalpy` → `Enthalpy` (version 1.0.6 → 1.0.7) — plus `ParameterRenames` and `IndexOfOutputParameter("Enthalpy")` in the component. Component GUID, parameter order, access, optionality, visibility, defaults, descriptions and engineering calculations unchanged; the other 22 naming deviations stay frozen. The metadata contract `design/grasshopper-icons/param_contract.json` (naming exceptions 23 → 22) and `docs/GH-Component-Metadata-Standard.md` were updated.
+- **Decisions**:
+  - Patch bump. `Obsolete` is triggered by any version difference and `ObsoleteSeverity` is only a log label (`MinCompatibleVersion` is unread), so the update is offered identically; a minor bump was noted in the acceptance review as an optional visibility improvement only.
+  - The rename migrates losslessly through the SAM updater (wires, persistent values, group membership) and remains breaking for name-based consumers outside it (documented).
+- **Files**: `Grasshopper/SAM.Core.Grasshopper.Psychrometrics/Component/SAMPsychrometricsPsychrometrics.cs`; `design/grasshopper-icons/param_contract.json`; `docs/GH-Component-Metadata-Standard.md`; `Grasshopper/SAM.Core.Grasshopper.Psychrometrics.Tests/{MetadataContractTests.cs,ParameterRenameMigrationTests.cs,SAM.Core.Grasshopper.Psychrometrics.Tests.csproj}`; `documentation/GH-Parameter-Rename-Enthalpy-Q4.md`.
+- **Tests (local, Windows, Rhino 8, Release)**: `dotnet build SAM_Psychrometrics.sln` 0 warnings / 0 errors; `dotnet test Grasshopper/SAM.Core.Grasshopper.Psychrometrics.Tests` **14 passed, 0 failed** (1 explicit fixture generator skipped), also re-verified against the merged SAM `sow/2026-Q4` @ `a1d605cf`; `python design/grasshopper-icons/tools/param_contract.py --check` (RhinoCode Python 3.13) **3 components checked: OK**.
+- **Risks / limitations**: external name-based consumers of `enthalpy`; no interactive canvas check; the test project is not in `SAM_Psychrometrics.sln` (needs Rhino 8).
+- **Cleanup**: `feature/gh-parameter-rename-migration-q4` deleted with an expected-SHA lease (`5f7f8cc`) after both merges, plus the local branch; no other branch, worktree or frozen quarter touched.
+- **Next step**: none. The remaining 22 deviations remain deferred and must not be renamed without an approved, runtime-tested migration each.
+
 ## Grasshopper component metadata standard pilot closeout - 2026-10-15
 
 - SAM-BIM/SAM_Psychrometrics#11 merged as `86dbeb4ac3168aa8c3a99f0e045ccdcba624d4b8` (merge commit pinned to approved head `ec8fdd169fefc650156e4930c1bb276486d30251`; base `sow/2026-Q4` `4c91e532409589b7125a9b3a42ad2551aac4c1c7`; validated content head `c1a517e496aa9f2c2738cab7f6d4cb98e273fc06`). Owner-approved 2026-10-15 for merge subject to the repository-required checks and approvals.
